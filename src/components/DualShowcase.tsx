@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SOFTWARE_PROJECTS, CREATIVE_PROJECTS } from '../data/portfolioData';
 import type { SoftwareProject, CreativeProject } from '../types';
@@ -18,6 +18,15 @@ import {
 export const DualShowcase: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'software' | 'creative'>('software');
   const [selectedSoftware, setSelectedSoftware] = useState<SoftwareProject | null>(null);
+  useEffect(() => {
+    const handleTabSwitch = (e: Event) => {
+      const customEvent = e as CustomEvent<'software' | 'creative'>;
+      setActiveTab(customEvent.detail);
+    };
+
+    window.addEventListener('switch-showcase-tab', handleTabSwitch);
+    return () => window.removeEventListener('switch-showcase-tab', handleTabSwitch);
+  }, []);
 
   return (
     <section id="showcase" className="w-full max-w-full py-28 sm:py-36 px-4 sm:px-6 lg:px-8 bg-[#F8F9FA] border-b border-neutral-200/60">
