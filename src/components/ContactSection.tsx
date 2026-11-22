@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   Copy,
   Check,
@@ -8,6 +8,7 @@ import {
   MapPin,
   Clock,
   Mail,
+  ChevronDown,
 } from 'lucide-react';
 
 const BUDGET_OPTIONS = {
@@ -37,6 +38,98 @@ const BUDGET_OPTIONS = {
 
 type Discipline = keyof typeof BUDGET_OPTIONS;
 
+interface CustomSelectProps {
+  label: string;
+  value: string;
+  options: readonly string[];
+  onChange: (value: string) => void;
+}
+
+const CustomSelect: React.FC<CustomSelectProps> = ({
+  label,
+  value,
+  options,
+  onChange,
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  return (
+    <div ref={dropdownRef} className="relative">
+      <label className="block text-xs font-semibold text-neutral-400 mb-2 uppercase tracking-wide">
+        {label}
+      </label>
+
+      <button
+        type="button"
+        onClick={() => setIsOpen((prev) => !prev)}
+        className={`w-full flex items-center justify-between bg-[#18181B] text-white rounded-xl border p-3.5 text-sm transition-colors text-left cursor-pointer ${
+          isOpen
+            ? 'border-[#DC2626]'
+            : 'border-neutral-800 hover:border-neutral-700'
+        }`}
+      >
+        <span className="truncate pr-2">{value}</span>
+        <ChevronDown
+          size={16}
+          className={`text-neutral-400 shrink-0 transition-transform duration-200 ${
+            isOpen ? 'rotate-180 text-[#DC2626]' : ''
+          }`}
+        />
+      </button>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -6, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -6, scale: 0.98 }}
+            transition={{ duration: 0.16, ease: 'easeOut' }}
+            className="absolute z-50 mt-2 w-full rounded-xl bg-[#18181B] border border-neutral-800 shadow-2xl shadow-black/60 overflow-hidden py-1.5"
+          >
+            {options.map((option) => {
+              const isSelected = option === value;
+              return (
+                <button
+                  key={option}
+                  type="button"
+                  onClick={() => {
+                    onChange(option);
+                    setIsOpen(false);
+                  }}
+                  className={`w-full flex items-center justify-between px-3.5 py-2.5 text-sm text-left transition-colors cursor-pointer ${
+                    isSelected
+                      ? 'bg-[#DC2626]/15 text-white font-medium'
+                      : 'text-neutral-300 hover:bg-neutral-800/80 hover:text-white'
+                  }`}
+                >
+                  <span className="truncate pr-2">{option}</span>
+                  {isSelected && (
+                    <Check size={14} className="text-[#DC2626] shrink-0" />
+                  )}
+                </button>
+              );
+            })}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
 export const ContactSection: React.FC = () => {
   const [copied, setCopied] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -54,7 +147,7 @@ export const ContactSection: React.FC = () => {
     message: '',
   });
 
-  // Replace XXXXXXXXXX with your 10-digit WhatsApp number (keep 91, no + or spaces)
+ 
   const whatsappNumber = '919339725204';
   const contactEmail = 'abnelpradhan7@gmail.com';
 
@@ -100,9 +193,11 @@ export const ContactSection: React.FC = () => {
   const currentBudgets = BUDGET_OPTIONS[formData.projectType];
 
   return (
-    <footer id="contact" className="w-full max-w-full bg-[#111111] text-white pt-28 sm:pt-36 pb-16 overflow-hidden">
+    <footer
+      id="contact"
+      className="w-full max-w-full bg-[#111111] text-white pt-28 sm:pt-36 pb-16 overflow-hidden"
+    >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        
         {/* Section Header */}
         <div className="flex items-center justify-between pb-6 border-b border-neutral-800 mb-16">
           <div className="flex items-center gap-3">
@@ -147,7 +242,6 @@ export const ContactSection: React.FC = () => {
 
         {/* 2-Column Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 sm:gap-16 mb-24">
-          
           {/* Left Column: Direct Info & Quick Copy */}
           <div className="lg:col-span-5 flex flex-col justify-between space-y-10">
             <div>
@@ -211,12 +305,12 @@ export const ContactSection: React.FC = () => {
                   },
                   {
                     name: 'LinkedIn',
-                    href: 'https://linkedin.com',
+                    href: 'https://www.linkedin.com/in/abnel-pradhan/',
                     path: 'M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z',
                   },
                   {
                     name: 'X',
-                    href: 'https://x.com',
+                    href: 'https://x.com/abnel-pradhan',
                     path: 'M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z',
                   },
                   {
@@ -274,7 +368,9 @@ export const ContactSection: React.FC = () => {
                       required
                       placeholder="Your full name"
                       value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      onChange={(e) =>
+                        setFormData({ ...formData, name: e.target.value })
+                      }
                       className="w-full bg-[#18181B] text-white rounded-xl border border-neutral-800 focus:border-[#DC2626] focus:outline-none p-3.5 text-sm transition-colors"
                     />
                   </div>
@@ -288,46 +384,29 @@ export const ContactSection: React.FC = () => {
                       required
                       placeholder="you@example.com"
                       value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      onChange={(e) =>
+                        setFormData({ ...formData, email: e.target.value })
+                      }
                       className="w-full bg-[#18181B] text-white rounded-xl border border-neutral-800 focus:border-[#DC2626] focus:outline-none p-3.5 text-sm transition-colors"
                     />
                   </div>
                 </div>
 
+                {/* Custom Animated Dropdowns */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-semibold text-neutral-400 mb-2 uppercase tracking-wide">
-                      Discipline
-                    </label>
-                    <select
-                      value={formData.projectType}
-                      onChange={(e) => handleDisciplineChange(e.target.value as Discipline)}
-                      className="w-full bg-[#18181B] text-white rounded-xl border border-neutral-800 focus:border-[#DC2626] focus:outline-none p-3.5 text-sm cursor-pointer"
-                    >
-                      {(Object.keys(BUDGET_OPTIONS) as Discipline[]).map((discipline) => (
-                        <option key={discipline} value={discipline}>
-                          {discipline}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
+                  <CustomSelect
+                    label="Discipline"
+                    value={formData.projectType}
+                    options={Object.keys(BUDGET_OPTIONS)}
+                    onChange={(val) => handleDisciplineChange(val as Discipline)}
+                  />
 
-                  <div>
-                    <label className="block text-xs font-semibold text-neutral-400 mb-2 uppercase tracking-wide">
-                      Expected Budget (INR)
-                    </label>
-                    <select
-                      value={formData.budget}
-                      onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                      className="w-full bg-[#18181B] text-white rounded-xl border border-neutral-800 focus:border-[#DC2626] focus:outline-none p-3.5 text-sm cursor-pointer"
-                    >
-                      {currentBudgets.map((tier) => (
-                        <option key={tier} value={tier}>
-                          {tier}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
+                  <CustomSelect
+                    label="Expected Budget (INR)"
+                    value={formData.budget}
+                    options={currentBudgets}
+                    onChange={(val) => setFormData({ ...formData, budget: val })}
+                  />
                 </div>
 
                 <div>
@@ -339,7 +418,9 @@ export const ContactSection: React.FC = () => {
                     required
                     placeholder="Tell me about your timeline, objectives, and deliverables..."
                     value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, message: e.target.value })
+                    }
                     className="w-full bg-[#18181B] text-white rounded-xl border border-neutral-800 focus:border-[#DC2626] focus:outline-none p-3.5 text-sm resize-none transition-colors"
                   />
                 </div>
@@ -354,7 +435,6 @@ export const ContactSection: React.FC = () => {
               </form>
             )}
           </div>
-
         </div>
 
         {/* Bottom Colophon */}
@@ -365,7 +445,7 @@ export const ContactSection: React.FC = () => {
 
           <div className="flex items-center gap-6">
             <span>Engineering & Visual Direction</span>
-            
+
             <button
               onClick={scrollToTop}
               className="hover:text-white transition-colors flex items-center gap-1 font-medium text-neutral-400"
@@ -376,7 +456,6 @@ export const ContactSection: React.FC = () => {
             </button>
           </div>
         </div>
-
       </div>
     </footer>
   );
