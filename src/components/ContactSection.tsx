@@ -10,18 +10,53 @@ import {
   Mail,
 } from 'lucide-react';
 
+const BUDGET_OPTIONS = {
+  'Software & Web Architecture': [
+    '₹5,000 – ₹10,000',
+    '₹10,000 – ₹25,000',
+    '₹25,000 – ₹50,000',
+    '₹50,000+',
+  ],
+  'Computer Vision & AI': [
+    '₹8,000 – ₹20,000',
+    '₹20,000 – ₹45,000',
+    '₹45,000+',
+  ],
+  'Motion & Film Direction': [
+    '₹1,500 – ₹3,000 (Single Reel)',
+    '₹5,000 – ₹12,000 (Monthly Pack)',
+    '₹12,000 – ₹25,000 (Commercial)',
+    '₹25,000+',
+  ],
+  'Full Creative Production': [
+    '₹15,000 – ₹30,000',
+    '₹30,000 – ₹60,000',
+    '₹60,000+',
+  ],
+} as const;
+
+type Discipline = keyof typeof BUDGET_OPTIONS;
+
 export const ContactSection: React.FC = () => {
   const [copied, setCopied] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<{
+    name: string;
+    email: string;
+    projectType: Discipline;
+    budget: string;
+    message: string;
+  }>({
     name: '',
     email: '',
-    projectType: 'Software & Architecture',
-    budget: '$5k - $15k',
+    projectType: 'Software & Web Architecture',
+    budget: BUDGET_OPTIONS['Software & Web Architecture'][0],
     message: '',
   });
 
-  const contactEmail = 'abnel.dev.creator@portfolio.internal';
+  // Replace XXXXXXXXXX with your 10-digit WhatsApp number (keep 91, no + or spaces)
+  const whatsappNumber = '919339725204';
+  const contactEmail = 'abnelpradhan7@gmail.com';
 
   const copyEmailToClipboard = () => {
     navigator.clipboard.writeText(contactEmail);
@@ -29,14 +64,40 @@ export const ContactSection: React.FC = () => {
     setTimeout(() => setCopied(false), 2500);
   };
 
+  const handleDisciplineChange = (newDiscipline: Discipline) => {
+    setFormData({
+      ...formData,
+      projectType: newDiscipline,
+      budget: BUDGET_OPTIONS[newDiscipline][0],
+    });
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    const whatsappMessage = [
+      `Hi Abnel! I'd like to discuss a project.`,
+      ``,
+      `*Name:* ${formData.name}`,
+      `*Email:* ${formData.email}`,
+      `*Discipline:* ${formData.projectType}`,
+      `*Expected Budget:* ${formData.budget}`,
+      `*Project Scope:* ${formData.message}`,
+    ].join('\n');
+
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+      whatsappMessage
+    )}`;
+
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
     setFormSubmitted(true);
   };
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  const currentBudgets = BUDGET_OPTIONS[formData.projectType];
 
   return (
     <footer id="contact" className="w-full max-w-full bg-[#111111] text-white pt-28 sm:pt-36 pb-16 overflow-hidden">
@@ -97,7 +158,7 @@ export const ContactSection: React.FC = () => {
                 Have a project or vision in mind?
               </h3>
               <p className="text-neutral-400 text-sm leading-relaxed mb-8">
-                Send a direct note or copy the contact address below. Let’s talk about timelines, performance goals, and creative scope.
+                Send a direct note on WhatsApp or copy the email address below. Let’s talk about timelines, performance goals, and creative scope.
               </p>
 
               {/* Copy Email Box */}
@@ -127,11 +188,11 @@ export const ContactSection: React.FC = () => {
                 </div>
                 <div className="flex items-center gap-3 p-3.5 rounded-xl bg-neutral-900/50 border border-neutral-800/60">
                   <MapPin size={16} className="text-[#DC2626]" />
-                  <span>Location: Zurich & Remote Global</span>
+                  <span>Location: Sikkim, India & Remote Global</span>
                 </div>
                 <div className="flex items-center gap-3 p-3.5 rounded-xl bg-neutral-900/50 border border-neutral-800/60">
                   <Mail size={16} className="text-[#DC2626]" />
-                  <span>Available for Q1–Q2 commissions</span>
+                  <span>Available for Freelance & Client Commissions</span>
                 </div>
               </div>
             </div>
@@ -145,7 +206,7 @@ export const ContactSection: React.FC = () => {
                 {[
                   {
                     name: 'GitHub',
-                    href: 'https://github.com',
+                    href: 'https://github.com/abnel-pradhan',
                     path: 'M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z',
                   },
                   {
@@ -159,9 +220,9 @@ export const ContactSection: React.FC = () => {
                     path: 'M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z',
                   },
                   {
-                    name: 'YouTube',
-                    href: 'https://youtube.com',
-                    path: 'M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z',
+                    name: 'Instagram',
+                    href: 'https://instagram.com/abnel_code',
+                    path: 'M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z',
                   },
                 ].map((s) => (
                   <a
@@ -181,7 +242,7 @@ export const ContactSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Clean Form */}
+          {/* Right Column: Clean WhatsApp Form */}
           <div className="lg:col-span-7 bg-neutral-900/60 p-8 sm:p-12 rounded-3xl border border-neutral-800">
             {formSubmitted ? (
               <div className="py-16 text-center">
@@ -189,16 +250,16 @@ export const ContactSection: React.FC = () => {
                   <Check size={26} />
                 </div>
                 <h4 className="font-display font-bold text-2xl text-white mb-2">
-                  Message Sent
+                  Opening WhatsApp
                 </h4>
                 <p className="text-sm text-neutral-400 max-w-sm mx-auto mb-8">
-                  Thank you for reaching out. I have received your note and will reply within 12 hours.
+                  Your project details have been pre-filled in WhatsApp. Just hit send there and I&apos;ll reply within 12 hours.
                 </p>
                 <button
                   onClick={() => setFormSubmitted(false)}
                   className="btn-secondary text-xs px-6 py-2.5"
                 >
-                  Send another message
+                  Edit or send another inquiry
                 </button>
               </div>
             ) : (
@@ -211,7 +272,7 @@ export const ContactSection: React.FC = () => {
                     <input
                       type="text"
                       required
-                      placeholder="Elena Rostova"
+                      placeholder="Your full name"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       className="w-full bg-[#18181B] text-white rounded-xl border border-neutral-800 focus:border-[#DC2626] focus:outline-none p-3.5 text-sm transition-colors"
@@ -225,7 +286,7 @@ export const ContactSection: React.FC = () => {
                     <input
                       type="email"
                       required
-                      placeholder="elena@studio.ch"
+                      placeholder="you@example.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       className="w-full bg-[#18181B] text-white rounded-xl border border-neutral-800 focus:border-[#DC2626] focus:outline-none p-3.5 text-sm transition-colors"
@@ -240,29 +301,31 @@ export const ContactSection: React.FC = () => {
                     </label>
                     <select
                       value={formData.projectType}
-                      onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
+                      onChange={(e) => handleDisciplineChange(e.target.value as Discipline)}
                       className="w-full bg-[#18181B] text-white rounded-xl border border-neutral-800 focus:border-[#DC2626] focus:outline-none p-3.5 text-sm cursor-pointer"
                     >
-                      <option>Software & Web Architecture</option>
-                      <option>Computer Vision & AI</option>
-                      <option>Motion & Film Direction</option>
-                      <option>Full Creative Production</option>
+                      {(Object.keys(BUDGET_OPTIONS) as Discipline[]).map((discipline) => (
+                        <option key={discipline} value={discipline}>
+                          {discipline}
+                        </option>
+                      ))}
                     </select>
                   </div>
 
                   <div>
                     <label className="block text-xs font-semibold text-neutral-400 mb-2 uppercase tracking-wide">
-                      Expected Budget
+                      Expected Budget (INR)
                     </label>
                     <select
                       value={formData.budget}
                       onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
                       className="w-full bg-[#18181B] text-white rounded-xl border border-neutral-800 focus:border-[#DC2626] focus:outline-none p-3.5 text-sm cursor-pointer"
                     >
-                      <option>&lt; $5,000</option>
-                      <option>$5,000 - $15,000</option>
-                      <option>$15,000 - $35,000</option>
-                      <option>$35,000+</option>
+                      {currentBudgets.map((tier) => (
+                        <option key={tier} value={tier}>
+                          {tier}
+                        </option>
+                      ))}
                     </select>
                   </div>
                 </div>
@@ -286,7 +349,7 @@ export const ContactSection: React.FC = () => {
                   className="btn-primary w-full py-4 text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2"
                 >
                   <Send size={14} />
-                  <span>Send Message</span>
+                  <span>Send via WhatsApp</span>
                 </button>
               </form>
             )}
@@ -301,7 +364,7 @@ export const ContactSection: React.FC = () => {
           </div>
 
           <div className="flex items-center gap-6">
-            <span>Swiss Editorial & Modern Architecture</span>
+            <span>Engineering & Visual Direction</span>
             
             <button
               onClick={scrollToTop}
