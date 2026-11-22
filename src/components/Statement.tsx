@@ -10,6 +10,7 @@ export const Statement: React.FC = () => {
       description:
         'Engineering fluid, real-time spatial computing with Python, OpenCV, and MediaPipe. Designing touchless interfaces that turn human movement into natural software interaction.',
       focus: 'Edge Intelligence',
+      targetTab: 'software' as const,
     },
     {
       number: '02',
@@ -17,6 +18,7 @@ export const Statement: React.FC = () => {
       description:
         'Crafting resilient, zero-layout-shift web applications using React, Next.js, and TypeScript. Prioritizing instant load speeds, responsive interactions, and accessible design.',
       focus: 'Modern Web Architecture',
+      targetTab: 'software' as const,
     },
     {
       number: '03',
@@ -24,13 +26,27 @@ export const Statement: React.FC = () => {
       description:
         'Directing rhythm-driven edits in DaVinci Resolve Studio and After Effects. Merging sound design, color science, and dynamic pacing to evoke genuine emotional impact.',
       focus: 'Cinematic Storytelling',
+      targetTab: 'creative' as const,
     },
   ];
 
+  const handlePillarClick = (targetTab: 'software' | 'creative') => {
+    window.dispatchEvent(
+      new CustomEvent('switch-showcase-tab', { detail: targetTab })
+    );
+
+    const workSection = document.getElementById('showcase');
+    if (workSection) {
+      workSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <section id="philosophy" className="w-full max-w-full py-28 sm:py-36 px-4 sm:px-6 lg:px-8 bg-white border-b border-neutral-200/60">
+    <section
+      id="philosophy"
+      className="w-full max-w-full py-28 sm:py-36 px-4 sm:px-6 lg:px-8 bg-white border-b border-neutral-200/60"
+    >
       <div className="max-w-6xl mx-auto">
-        
         {/* Section Header */}
         <div className="flex items-center justify-between pb-6 border-b border-neutral-100 mb-16">
           <div className="flex items-center gap-3">
@@ -38,9 +54,7 @@ export const Statement: React.FC = () => {
               Philosophy & Method
             </span>
             <span className="text-neutral-300">•</span>
-            <span className="text-xs text-neutral-400">
-              Core Practices
-            </span>
+            <span className="text-xs text-neutral-400">Core Practices</span>
           </div>
           <span className="text-xs text-neutral-400 font-medium">
             Swiss Editorial
@@ -78,12 +92,17 @@ export const Statement: React.FC = () => {
           {pillars.map((pillar, idx) => (
             <motion.div
               key={pillar.number}
+              onClick={() => handlePillarClick(pillar.targetTab)}
               initial={{ opacity: 0, y: 60 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.9, delay: idx * 0.12, ease: [0.16, 1, 0.3, 1] }}
+              transition={{
+                duration: 0.9,
+                delay: idx * 0.12,
+                ease: [0.16, 1, 0.3, 1],
+              }}
               whileHover={{ y: -8, transition: { duration: 0.4 } }}
-              className="card-soothing p-8 sm:p-10 flex flex-col justify-between group"
+              className="card-soothing p-8 sm:p-10 flex flex-col justify-between group cursor-pointer"
             >
               <div>
                 <div className="flex items-center justify-between pb-6 border-b border-neutral-100 mb-8 text-xs">
@@ -105,15 +124,17 @@ export const Statement: React.FC = () => {
               </div>
 
               <div className="pt-8 mt-8 border-t border-neutral-100 flex items-center justify-between text-xs text-neutral-400">
-                <span>Production Practice</span>
+                <span>View Projects</span>
                 <div className="w-8 h-8 rounded-full bg-neutral-50 flex items-center justify-center group-hover:bg-red-50 group-hover:text-[#DC2626] transition-colors">
-                  <ArrowUpRight size={14} />
+                  <ArrowUpRight
+                    size={14}
+                    className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  />
                 </div>
               </div>
             </motion.div>
           ))}
         </div>
-
       </div>
     </section>
   );
