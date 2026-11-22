@@ -107,7 +107,7 @@ export const CREATIVE_PROJECTS: CreativeProject[] = [
     tools: ['After Effects', 'DaVinci Resolve'],
     description:
       'A high-frame-rate 60fps 1080p portfolio showreel crafted with custom keyframe animations, kinetic typography, and seamless click-triggered UI transitions. Finished with crisp sound design layering and clean visual pacing.',
-    videoPreviewUrl: './portfolio-reel.mp4', // drop your exported MP4 into public/
+    videoPreviewUrl: 'https://res.cloudinary.com/bymoz9fs/video/upload/v1795363981/portfolio-reel.mp4', // drop your exported MP4 into public/
     thumbnail: './portfolio-reel-thumb.png', // drop a cover frame into public/
     highlightCuts: ['Keyframe Motion', 'UI Transitions', 'Kinetic Type', 'SFX Sync'],
     colorPalette: ['#DC2626', '#0A0A0A', '#FFFFFF', '#1E293B'],
@@ -124,7 +124,7 @@ export const CREATIVE_PROJECTS: CreativeProject[] = [
     tools: ['CapCut'],
     description:
       'A fast-paced, beat-synced kinetic typography reel built for high retention. Combines bold text animations, custom keyframe graphs, punchy speed ramps, and layered sound effects.',
-    videoPreviewUrl: './typography-reel.mp4', // drop your exported MP4 into public/
+    videoPreviewUrl: 'https://res.cloudinary.com/bymoz9fs/video/upload/v1795364009/typography-reel.mp4', // drop your exported MP4 into public/
     thumbnail: './typography-thumb.png', // drop a cover frame into public/
     highlightCuts: ['Beat Sync', 'Text Keyframes', 'Speed Ramps', 'SFX Hits'],
     colorPalette: ['#DC2626', '#0A0A0A', '#FFFFFF', '#FACC15'],
@@ -141,7 +141,7 @@ export const CREATIVE_PROJECTS: CreativeProject[] = [
     tools: ['CapCut', 'After Effects'], // update to the tools you used
     description:
       'A high-retention vertical (9:16) edit produced for a paid client campaign. Engineered with hook-first pacing, clean dynamic captions, smooth transitions, and punchy sound design tailored for Instagram Reels and Shorts.',
-    videoPreviewUrl: './paid-reel.mp4', // drop your exported MP4 into public/
+    videoPreviewUrl: 'https://res.cloudinary.com/bymoz9fs/video/upload/v1795363755/paid-reel.mp4', // drop your exported MP4 into public/
     thumbnail: './paid-reel-thumb.png', // drop a cover frame into public/
     highlightCuts: ['Hook Pacing', '9:16 Vertical', 'Dynamic Captions', 'SFX Layering'],
     colorPalette: ['#DC2626', '#0A0A0A', '#FFFFFF', '#6B7280'],
@@ -158,7 +158,7 @@ export const CREATIVE_PROJECTS: CreativeProject[] = [
     tools: ['CapCut', 'DaVinci Resolve'], // update to the exact tools you used
     description:
       'A paid vertical reel built with custom speed and keyframe graphs, smooth UI/motion animations, and layered sound effects. Engineered for fluid pacing and high viewer retention from the first frame.',
-    videoPreviewUrl: './paid-reel-2.mp4', // drop your exported MP4 into public/
+    videoPreviewUrl: 'https://res.cloudinary.com/bymoz9fs/video/upload/v1795364076/paid-reel-2.mp4', // drop your exported MP4 into public/
     thumbnail: './paid-reel-2-thumb.png', // drop a cover frame into public/
     highlightCuts: ['Speed Graphs', 'Custom Animations', 'SFX Layering', '9:16 Vertical'],
     colorPalette: ['#DC2626', '#0A0A0A', '#FFFFFF', '#FACC15'],
