@@ -48,7 +48,7 @@ export const HeroSandwich: React.FC = () => {
           <span className="w-2 h-2 rounded-full bg-[#DC2626] animate-pulse" />
           <span className="text-neutral-900 font-semibold tracking-normal">Abnel Studio</span>
           <span className="text-neutral-300">•</span>
-          <span>Zurich & Worldwide</span>
+          <span>India Sikkim & Worldwide</span>
         </div>
 
         <div className="flex items-center gap-3">
