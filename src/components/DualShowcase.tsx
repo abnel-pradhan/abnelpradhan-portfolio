@@ -326,11 +326,11 @@ const SoothingVideoCard: React.FC<SoothingVideoCardProps> = ({ video, index }) =
         </p>
 
         {/* Video Player Container */}
-        <div className="relative w-full aspect-video rounded-2xl bg-neutral-900 mb-8 overflow-hidden shadow-inner">
+        <div className="relative w-full aspect-video rounded-2xl bg-black mb-8 overflow-hidden shadow-inner">
           <img
             src={video.thumbnail}
             alt={video.title}
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
+            className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-700 ${
               isPlaying ? 'opacity-0' : 'opacity-100'
             }`}
           />
@@ -342,11 +342,10 @@ const SoothingVideoCard: React.FC<SoothingVideoCardProps> = ({ video, index }) =
             loop
             playsInline
             preload="metadata"
-            className={`w-full h-full object-cover transition-opacity duration-700 ${
+            className={`w-full h-full object-contain transition-opacity duration-700 ${
               isPlaying ? 'opacity-100' : 'opacity-0'
             }`}
           />
-
           {/* Hover Status Tag */}
           <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-md text-white text-xs px-3 py-1.5 rounded-full flex items-center gap-1.5 font-medium">
             {isPlaying ? (

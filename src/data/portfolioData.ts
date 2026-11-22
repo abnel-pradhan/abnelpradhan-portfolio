@@ -92,138 +92,76 @@ export const SOFTWARE_PROJECTS: SoftwareProject[] = [
       'Zero-latency spatial landmark tracking designed for interactive installations',
     ],
   },
-  {
-    id: 'chronos-analytics',
-    title: 'Chronos Telemetry Engine',
-    subtitle: 'Distributed real-time streaming & event architecture',
-    description: 'A high-throughput event ingestion and visual analytics platform. Engineered for seamless telemetry visualization, delta data compression, and responsive dashboard interfaces.',
-    category: 'Distributed Systems',
-    year: '2025',
-    tags: ['Next.js', 'TypeScript', 'Node.js', 'Redis', 'Tailwind'],
-    metrics: [
-      { label: 'Performance', value: 'Real-Time' },
-      { label: 'Throughput', value: 'High Scale' },
-      { label: 'Delivery', value: 'Edge' },
-    ],
-    liveUrl: '#',
-    githubUrl: 'https://github.com',
-    featuredImage: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80',
-    architectureDetails: [
-      'Distributed event cluster streaming updates directly to client browsers',
-      'Microsecond delta calculations minimizing bandwidth and memory footprint',
-      'Clean editorial visual charts rendering hundreds of thousands of data points smoothly',
-    ],
-  },
-  {
-    id: 'kinesis-engine',
-    title: 'Kinesis Kinematic Analyzer',
-    subtitle: 'Athletic motion biomechanics & skeletal tracking',
-    description: 'Deep-learning assisted sports biomechanics analyzer. Calculates joint angle velocities and movement symmetry in real time using Python and skeletal point topology.',
-    category: 'Applied AI',
-    year: '2024',
-    tags: ['Python', 'PyTorch', 'MediaPipe', 'FastAPI', 'Three.js'],
-    metrics: [
-      { label: 'Precision', value: 'Exact' },
-      { label: 'Feedback', value: 'Live' },
-      { label: 'Inference', value: 'Smooth' },
-    ],
-    liveUrl: '#',
-    githubUrl: 'https://github.com',
-    featuredImage: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80',
-    architectureDetails: [
-      'Calculates joint velocity vectors across physical kinematic chains',
-      'Interactive 3D wireframe avatar overlay for immediate visual feedback',
-      'Asynchronous video processing pipeline built with FastAPI and WebSockets',
-    ],
-  },
-  {
-    id: 'monolith-commerce',
-    title: 'Monolith Editorial Commerce',
-    subtitle: 'High-speed headless commerce & fluid user experience',
-    description: 'A serene, high-performance shopping experience built for modern fashion and architectural brands. Crafted with micro-interactions, instant page loads, and zero layout shifts.',
-    category: 'Web Experience',
-    year: '2024',
-    tags: ['React', 'Next.js', 'PostgreSQL', 'Framer Motion'],
-    metrics: [
-      { label: 'Score', value: '100 / 100' },
-      { label: 'Experience', value: 'Fluid' },
-      { label: 'Conversion', value: 'Optimal' },
-    ],
-    liveUrl: '#',
-    githubUrl: 'https://github.com',
-    featuredImage: 'https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=1200&q=80',
-    architectureDetails: [
-      'Instant client pre-fetching yielding immediate transitions on click',
-      'Optimistic state reconciliation for cart and checkout pipelines',
-      'Minimalist editorial typography and breathing room throughout every view',
-    ],
-  },
 ];
 
 export const CREATIVE_PROJECTS: CreativeProject[] = [
   {
-    id: 'cyber-pulse-reel',
-    title: 'Pulse Showreel',
-    role: 'Lead Editor, Sound Designer & Colorist',
-    genre: 'Commercial & Motion',
-    year: '2025',
-    duration: '0:45',
-    bpm: 142,
-    cutRate: '0.4s',
-    tools: ['DaVinci Resolve Studio', 'After Effects', 'Pro Tools'],
-    description: 'A rhythm-driven visual piece featuring synchronized cuts locked to subtle audio transients, dynamic optical speedramps, and custom film-print emulation grading.',
-    videoPreviewUrl: 'https://assets.mixkit.co/videos/preview/mixkit-futuristic-city-street-with-neon-lights-at-night-42930-large.mp4',
-    thumbnail: 'https://images.unsplash.com/photo-1508739773434-c26b3d09e071?auto=format&fit=crop&w=1200&q=80',
-    highlightCuts: ['Match Cut', 'Speedramp', 'Audio Climax', 'Film Texture'],
-    colorPalette: ['#DC2626', '#0A0A0A', '#1E293B', '#FACC15'],
-  },
-  {
-    id: 'tokyo-drift-kinetic',
-    title: 'Nocturne Tokyo',
-    role: 'Director, Editor & Colorist',
-    genre: 'Cinematic Narrative',
-    year: '2024',
-    duration: '1:18',
+    id: 'portfolio-showreel',
+    title: 'Kinetic Portfolio Showreel',
+    role: 'Motion Designer, Editor & Sound Designer',
+    genre: 'Motion Graphics & UI Showcase',
+    year: '2026',
+    duration: '0:30', // adjust to your exact exported video length
     bpm: 128,
-    cutRate: '0.7s',
-    tools: ['Premiere Pro', 'After Effects', 'DaVinci Resolve'],
-    description: 'An atmospheric study of nocturnal movement. Subtle 16mm film textures combined with camera projections, balanced chromatic sweeps, and layered environmental soundscapes.',
-    videoPreviewUrl: 'https://assets.mixkit.co/videos/preview/mixkit-car-driving-through-a-city-at-night-4158-large.mp4',
-    thumbnail: 'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=1200&q=80',
-    highlightCuts: ['Spatial Cut', 'Optical Flow', 'Subtle Tone Shift'],
-    colorPalette: ['#DC2626', '#0284C7', '#111827', '#F3F4F6'],
+    cutRate: '0.5s',
+    tools: ['After Effects', 'DaVinci Resolve'],
+    description:
+      'A high-frame-rate 60fps 1080p portfolio showreel crafted with custom keyframe animations, kinetic typography, and seamless click-triggered UI transitions. Finished with crisp sound design layering and clean visual pacing.',
+    videoPreviewUrl: './portfolio-reel.mp4', // drop your exported MP4 into public/
+    thumbnail: './portfolio-reel-thumb.png', // drop a cover frame into public/
+    highlightCuts: ['Keyframe Motion', 'UI Transitions', 'Kinetic Type', 'SFX Sync'],
+    colorPalette: ['#DC2626', '#0A0A0A', '#FFFFFF', '#1E293B'],
   },
   {
-    id: 'hyper-drive-commercial',
-    title: 'Hyperdrive Fashion Promo',
-    role: 'Motion Designer & Editor',
-    genre: 'Editorial & Fashion',
-    year: '2024',
-    duration: '0:30',
-    bpm: 156,
+    id: 'kinetic-typography-reel',
+    title: 'Kinetic Typography Reel',
+    role: 'Video Editor & Motion Designer',
+    genre: 'Short-Form & Typography',
+    year: '2026',
+    duration: '0:25', // adjust to your exact video length
+    bpm: 135,
     cutRate: '0.35s',
-    tools: ['After Effects', 'Blender', 'DaVinci Resolve'],
-    description: 'Kinetic edits tailored for visual fashion. 3D simulation elements integrated with live footage, delicate typography stamps, and calming balanced framing.',
-    videoPreviewUrl: 'https://assets.mixkit.co/videos/preview/mixkit-portrait-of-a-fashion-model-with-silver-makeup-40118-large.mp4',
-    thumbnail: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80',
-    highlightCuts: ['Typography Motion', 'Soft Freeze-frame', 'Zoom Cadence'],
-    colorPalette: ['#DC2626', '#111111', '#FFFFFF', '#6B7280'],
+    tools: ['CapCut'],
+    description:
+      'A fast-paced, beat-synced kinetic typography reel built for high retention. Combines bold text animations, custom keyframe graphs, punchy speed ramps, and layered sound effects.',
+    videoPreviewUrl: './typography-reel.mp4', // drop your exported MP4 into public/
+    thumbnail: './typography-thumb.png', // drop a cover frame into public/
+    highlightCuts: ['Beat Sync', 'Text Keyframes', 'Speed Ramps', 'SFX Hits'],
+    colorPalette: ['#DC2626', '#0A0A0A', '#FFFFFF', '#FACC15'],
   },
   {
-    id: 'sound-sculpt-documentary',
-    title: 'Sub-Harmonic Archive',
-    role: 'Documentary Editor & Sound Engineer',
-    genre: 'Documentary Short',
-    year: '2024',
-    duration: '2:45',
-    bpm: 96,
-    cutRate: '1.2s',
-    tools: ['DaVinci Resolve', 'Logic Pro', 'iZotope RX'],
-    description: 'A deep narrative journey into analog synthesizer craftsmanship. Deliberate, contemplative camera movements paired with warm analog soundscapes and crisp audio restoration.',
-    videoPreviewUrl: 'https://assets.mixkit.co/videos/preview/mixkit-sound-board-in-a-recording-studio-41772-large.mp4',
-    thumbnail: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=1200&q=80',
-    highlightCuts: ['Frequency Transition', 'Split Screen', 'Audio Crossfade'],
-    colorPalette: ['#111111', '#DC2626', '#D97706', '#E5E7EB'],
+    id: 'client-commercial-reel',
+    title: 'Client Commercial Reel', // replace with the brand/client name if allowed
+    role: 'Lead Video Editor',
+    genre: 'Paid Client Work (9:16)',
+    year: '2026',
+    duration: '0:30', // adjust to your exact video length
+    bpm: 130,
+    cutRate: '0.4s',
+    tools: ['CapCut', 'After Effects'], // update to the tools you used
+    description:
+      'A high-retention vertical (9:16) edit produced for a paid client campaign. Engineered with hook-first pacing, clean dynamic captions, smooth transitions, and punchy sound design tailored for Instagram Reels and Shorts.',
+    videoPreviewUrl: './paid-reel.mp4', // drop your exported MP4 into public/
+    thumbnail: './paid-reel-thumb.png', // drop a cover frame into public/
+    highlightCuts: ['Hook Pacing', '9:16 Vertical', 'Dynamic Captions', 'SFX Layering'],
+    colorPalette: ['#DC2626', '#0A0A0A', '#FFFFFF', '#6B7280'],
+  },
+  {
+    id: 'paid-motion-graph-reel',
+    title: 'Dynamic Motion & SFX Reel', // replace with the client/project name if you'd like
+    role: 'Video Editor & Motion Designer',
+    genre: 'Paid Client Work (9:16)',
+    year: '2026',
+    duration: '0:30', // adjust to your exact video length
+    bpm: 132,
+    cutRate: '0.4s',
+    tools: ['CapCut', 'DaVinci Resolve'], // update to the exact tools you used
+    description:
+      'A paid vertical reel built with custom speed and keyframe graphs, smooth UI/motion animations, and layered sound effects. Engineered for fluid pacing and high viewer retention from the first frame.',
+    videoPreviewUrl: './paid-reel-2.mp4', // drop your exported MP4 into public/
+    thumbnail: './paid-reel-2-thumb.png', // drop a cover frame into public/
+    highlightCuts: ['Speed Graphs', 'Custom Animations', 'SFX Layering', '9:16 Vertical'],
+    colorPalette: ['#DC2626', '#0A0A0A', '#FFFFFF', '#FACC15'],
   },
 ];
 
