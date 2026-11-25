@@ -6,6 +6,7 @@ import { Statement } from './components/Statement';
 import { DualShowcase } from './components/DualShowcase';
 import { TechArsenalMarquee } from './components/TechArsenalMarquee';
 import { ContactSection } from './components/ContactSection';
+import { ChatWidget } from './components/ChatWidget';
 
 export function App() {
   return (
@@ -33,6 +34,9 @@ export function App() {
           {/* Brutalist Contact & Dispatch Terminal */}
           <ContactSection />
         </main>
+
+        {/* Floating AI Portfolio Assistant */}
+        <ChatWidget />
       </div>
     </SmoothScrollProvider>
   );
